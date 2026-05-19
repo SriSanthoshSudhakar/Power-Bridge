@@ -1,0 +1,146 @@
+/* --- 1. CORE VARIABLES & RESET --- */
+:root {
+  --navy: #00008B;
+  --white: #ffffff;
+  --bg-shade: #f1f5f9;
+  --text-dark: #1e293b;
+  --text-grey: #64748b;
+  --border-light: #e2e8f0;
+  
+  /* Layout Sizing */
+  --sidebar-width: 260px;
+  --navbar-height: 70px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--bg-shade);
+  color: var(--text-dark);
+  overflow: hidden; /* Fix: Prevent whole page from scrolling */
+  transition: background-color 0.3s ease;
+}
+
+/* --- 2. FULL-SCREEN SLIDING LOGIN (Keep as is) --- */
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+.auth-container { background-color: #fff; position: relative; overflow: hidden; width: 100%; height: 100%; }
+.form-container { position: absolute; top: 0; height: 100%; transition: all 0.6s ease-in-out; background-color: #fff; }
+.admin-container { left: 0; width: 50%; z-index: 2; }
+.auth-container.right-panel-active .admin-container { transform: translateX(100%); }
+.public-container { left: 0; width: 50%; opacity: 0; z-index: 1; }
+.auth-container.right-panel-active .public-container { transform: translateX(100%); opacity: 1; z-index: 5; animation: show 0.6s; }
+@keyframes show { 0%, 49.99% { opacity: 0; z-index: 1; } 50%, 100% { opacity: 1; z-index: 5; } }
+form { display: flex; align-items: center; justify-content: center; flex-direction: column; height: 100%; width: 100%; }
+.form-content { width: 100%; max-width: 420px; text-align: left; }
+form h1 { font-size: 3.2rem; font-weight: 800; margin-bottom: 5px; color: #000; }
+.subtitle { font-size: 1.1rem; color: var(--text-grey); margin-bottom: 40px; }
+.input-group { width: 100%; margin-bottom: 20px; }
+.input-group label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.input-group input { width: 100%; padding: 14px; border: 1.5px solid #000; border-radius: 8px; font-size: 16px; outline: none; }
+.login-btn { width: 100%; padding: 18px 0; background-color: #4a4a4a; color: #fff; border: none; border-radius: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; }
+.switch-text { margin-top: 25px; font-size: 15px; }
+.switch-text span { color: var(--navy); font-weight: 800; cursor: pointer; text-decoration: underline; }
+.overlay-container { position: absolute; top: 0; left: 50%; width: 50%; height: 100%; overflow: hidden; transition: transform 0.6s ease-in-out; z-index: 100; }
+.auth-container.right-panel-active .overlay-container { transform: translateX(-100%); }
+.overlay { background: var(--navy); position: relative; left: -100%; height: 100%; width: 200%; transform: translateX(0); transition: transform 0.6s ease-in-out; }
+.auth-container.right-panel-active .overlay { transform: translateX(50%); }
+.overlay-panel { position: absolute; top: 0; height: 100%; width: 50%; transition: transform 0.6s ease-in-out; }
+.side-image { width: 100%; height: 100%; object-fit: cover; }
+.overlay-left { transform: translateX(-20%); }
+.auth-container.right-panel-active .overlay-left { transform: translateX(0); }
+.overlay-right { right: 0; transform: translateX(0); }
+.auth-container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+/* --- 3. LOADER (Keep as is) --- */
+.loader-fullscreen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--navy); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; }
+.circular-loader { width: 65px; height: 65px; border: 6px solid rgba(255, 255, 255, 0.2); border-top: 6px solid #ffffff; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loader-text { color: white; margin-top: 25px; font-weight: 600; letter-spacing: 1px; }
+
+/* --- 4. FLUID DASHBOARD LAYOUT (FIXED FOR FULL HEIGHT) --- */
+.app-main-wrapper {
+  max-width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  height: 100vh;
+  background: var(--bg-shade);
+}
+
+.app-sidebar {
+  width: var(--sidebar-width);
+  background: white;
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.app-content-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 0; /* Important for flex child sizing */
+}
+
+/* --- 5. LIVE COMPONENTS (Tables, KPI cards - Keep as is) --- */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 30px; }
+.kpi-box { background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border-light); box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.kpi-box span { display: block; font-size: 13px; color: var(--text-grey); font-weight: 700; margin-bottom: 8px; }
+.kpi-box strong { font-size: 28px; color: var(--navy); }
+.pro-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+.pro-table th { background: #f8fafc; padding: 16px; text-align: left; font-size: 14px; font-weight: 700; color: var(--text-grey); border-bottom: 1.5px solid var(--border-light); }
+.pro-table td { padding: 16px; border-bottom: 1px solid var(--bg-shade); font-size: 14px; }
+.pill { padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+.pill.red { background: #fee2e2; color: #ef4444; }
+.pill.green { background: #dcfce7; color: #166534; }
+
+/* --- 6. RESPONSIVE UTILITIES --- */
+@media (max-width: 800px) { .overlay-container { display: none; } .form-container { width: 100%; } }
+
+/* --- 7. FIXES FOR BI DASHBOARD & PAGE SCROLLING --- */
+
+/* Ensures the page container takes up all available space below Navbar */
+main {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto; /* Standard pages scroll here */
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Special class to remove padding when viewing the Historical Dashboard */
+.no-padding-main {
+  padding: 0px !important;
+  overflow: hidden !important; /* Prevents double scrollbar */
+}
+
+/* Container for the IBM Iframe */
+.bi-dashboard-container {
+  width: 100%;
+  height: calc(100vh - var(--navbar-height)); /* Fills exactly the remaining height */
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.bi-iframe-wrapper {
+  flex: 1;
+  width: 100%;
+  border: none;
+}

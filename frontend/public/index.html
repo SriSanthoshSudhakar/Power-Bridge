@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    
+    <!-- 1. Browser Tab Icon (Added ?v=1 to force refresh) -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico?v=1" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- 2. Theme Color (Set to your Dark Blue #00008B) -->
+    <meta name="theme-color" content="#00008B" />
+    
+    <meta
+      name="description"
+      content="PowerBridge - Advanced Hardware and Infrastructure Monitoring System"
+    />
+    
+    <!-- 3. Apple Home Screen Icon -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png?v=1" />
+
+    <!-- 4. Manifest for PWA Support -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- 5. Tab Title -->
+    <title>PowerBridge</title>
+
+    <!-- Professional Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      /* Smooth base transitions and font loading */
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f8fafc;
+      }
+      
+      /* Optional: Hide the default horizontal scrollbar 
+         if the content is exactly 1200-1440px */
+      #root {
+        min-height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Main React App entry point -->
+    <div id="root"></div>
+
+    <!-- 
+      Note: Ensure the following files exist in this 'public' folder:
+      - favicon.ico (your lightning logo)
+      - logo192.png (your lightning logo 192x192)
+      - logo512.png (your lightning logo 512x512)
+    -->
+  </body>
+</html>
